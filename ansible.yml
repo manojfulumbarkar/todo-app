@@ -1,0 +1,13 @@
+- hosts: all
+  user: root
+  become: yes
+  connection: ssh
+  tasks:
+    - name: stop container
+      shell: docker stop mycontainer
+    - name: remove container
+      shell: docker rm mycontainer
+    - name: remove image
+      shell: docker image rm -f manojfulumbarkar/myproject
+    - name: create new container
+      shell: docker run -d --name mycontainer -p 8000:8000 manojfulumbarkar/myproject
